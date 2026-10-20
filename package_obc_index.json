@@ -1,0 +1,51 @@
+{
+  "packages": [
+    {
+      "name": "obc",
+      "maintainer": "AIR ESIEA",
+      "websiteURL": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.1",
+      "email": "",
+      "help": {
+        "online": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.1"
+      },
+      "platforms": [
+        {
+          "name": "OBC-STD Minifs (AIR ESIEA)",
+          "architecture": "samd51obc",
+          "version": "0.1.1",
+          "category": "Contributed",
+          "url": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.1/obc-samd51obc-0.1.1.tar.bz2",
+          "archiveFileName": "obc-samd51obc-0.1.1.tar.bz2",
+          "checksum": "SHA-256:b0eee46f7cb21d2578eccd043f9afa91c04b709f87a7ef8aa8e60784eea1de4b",
+          "size": "424803",
+          "help": {
+            "online": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.1"
+          },
+          "boards": [
+            {
+              "name": "OBC-STD Minifs (Rev A)"
+            }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "arduino",
+              "name": "arm-none-eabi-gcc",
+              "version": "7-2017q4"
+            },
+            {
+              "packager": "arduino",
+              "name": "bossac",
+              "version": "1.8.0-48-gb176eee"
+            },
+            {
+              "packager": "arduino",
+              "name": "openocd",
+              "version": "0.11.0-arduino2"
+            }
+          ]
+        }
+      ],
+      "tools": []
+    }
+  ]
+}
