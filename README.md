@@ -3,7 +3,7 @@
 Paquet Arduino IDE pour l'ordinateur de bord standardisé des minifusées (AIR ESIEA), basé sur l'**ATSAMD51J20A**.
 Une fois installé, la carte apparaît dans *Outils > Type de carte* et se programme comme un Arduino classique.
 
-Version **0.1.1** : première version, compilée et testée à la compilation. **Elle n'a pas encore été testée sur une carte réelle.**
+Version **0.1.2** : première version, compilée et testée à la compilation. **Elle n'a pas encore été testée sur une carte réelle.**
 
 ## Contenu
 
@@ -77,7 +77,7 @@ Câblage sur le connecteur SWD : SWCLK, SWDIO, GND, 3V3 (référence) et RESET.
 ## Publier une version (mainteneur)
 
 ```
-python3 tools/make_release.py https://github.com/<compte>/obc-arduino/releases/download/v0.1.1
+python3 tools/make_release.py https://github.com/<compte>/obc-arduino/releases/download/v0.1.2
 ```
 Mettre en ligne les deux fichiers de `dist/` à cette adresse (par ex. une *release* GitHub).
 

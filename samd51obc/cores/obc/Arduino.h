@@ -18,7 +18,7 @@
 #include "sam.h"
 #include "variant.h"
 
-#define ARDUINO_OBC_CORE_VERSION "0.1.0"
+#define ARDUINO_OBC_CORE_VERSION "0.1.2"
 
 #ifdef __cplusplus
 extern "C" {

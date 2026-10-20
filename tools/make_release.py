@@ -44,10 +44,10 @@ def main():
     index = {
         "packages": [{
             "name": "obc",
-            "maintainer": "AIR ESIEA",
-            "websiteURL": base_url,
+            "maintainer": "Arkyos03 for AIR ESIEA",
+            "websiteURL": "https://github.com/Arkyos03/OBC-Arduino",
             "email": "",
-            "help": {"online": base_url},
+            "help": {"online": "https://github.com/Arkyos03/OBC-Arduino"},
             "platforms": [{
                 "name": "OBC-STD Minifs (AIR ESIEA)",
                 "architecture": "samd51obc",
@@ -57,7 +57,7 @@ def main():
                 "archiveFileName": archive.name,
                 "checksum": "SHA-256:" + hashlib.sha256(data).hexdigest(),
                 "size": str(len(data)),
-                "help": {"online": base_url},
+                "help": {"online": "https://github.com/Arkyos03/OBC-Arduino"},
                 "boards": [{"name": b.strip()} for b in boards],
                 "toolsDependencies": [
                     {"packager": "arduino", "name": "arm-none-eabi-gcc", "version": "7-2017q4"},
