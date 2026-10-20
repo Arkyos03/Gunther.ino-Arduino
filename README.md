@@ -111,6 +111,6 @@ Si le téléversement échoue (programme planté) :
 
 <div align="center">
 
-Licence MIT · AIR ESIEA
+Licence MIT · Arkyos03 for AIR ESIEA
 
 </div>
