@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - TinyUSB configuration (USB CDC serial port)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #ifndef OBC_TUSB_CONFIG_H
 #define OBC_TUSB_CONFIG_H

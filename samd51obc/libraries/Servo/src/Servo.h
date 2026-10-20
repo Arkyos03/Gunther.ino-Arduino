@@ -1,6 +1,6 @@
 /*
  * OBC-STD - Servo library (hardware PWM on TCC1, 50 Hz)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * Works on SERVO_1 .. SERVO_4. Same API as the classic Arduino Servo library:
  *   Servo trappe;

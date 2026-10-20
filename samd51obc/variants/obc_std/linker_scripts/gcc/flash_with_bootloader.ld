@@ -1,7 +1,7 @@
 /*
  * OBC-STD - linker script for ATSAMD51J20A (1 MB flash, 256 KB RAM)
  * Application placed after the 16 KB UF2 bootloader.
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License
  */
 
 MEMORY

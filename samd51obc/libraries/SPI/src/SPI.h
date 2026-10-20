@@ -1,6 +1,6 @@
 /*
  * OBC-STD - SPI library (Arduino compatible API)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  *   SPI  : micro SD card bus      (SERCOM2 - PA12 MOSI, PA13 SCK, PA14 MISO)
  *   SPI1 : IMU BMI088 bus         (SERCOM4 - PB12 MOSI, PB13 SCK, PB14 MISO)

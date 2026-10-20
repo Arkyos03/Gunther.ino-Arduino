@@ -1,6 +1,6 @@
 /*
  * OBC-STD Minifs (AIR ESIEA) - pin description table
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * Pin multiplexing taken from the ATSAMD51J20A datasheet (I/O multiplexing table).
  */

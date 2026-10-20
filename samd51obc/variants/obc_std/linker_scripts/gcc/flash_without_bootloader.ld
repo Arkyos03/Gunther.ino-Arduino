@@ -1,6 +1,6 @@
 /*
  * OBC-STD - linker script for ATSAMD51J20A, no bootloader (flash through SWD)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License
  */
 
 MEMORY

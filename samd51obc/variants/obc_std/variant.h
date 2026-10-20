@@ -2,7 +2,7 @@
  * OBC-STD Minifs (AIR ESIEA) - board definition (pin map)
  * MCU : ATSAMD51J20A-AUT (TQFP64), 120 MHz, 1 MB flash, 256 KB RAM
  *
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * Pin numbers below are the numbers used in sketches:
  *   pinMode(LED_1, OUTPUT);  digitalWrite(LED_1, HIGH);  ...

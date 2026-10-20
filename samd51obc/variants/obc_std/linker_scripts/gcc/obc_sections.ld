@@ -1,6 +1,6 @@
 /*
  * OBC-STD - common section layout (Cortex-M4F, GCC / newlib)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License
  */
 
 ENTRY(Reset_Handler)

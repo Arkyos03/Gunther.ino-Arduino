@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - C++ new / delete (on top of malloc / free)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #include <stdlib.h>
 #include <stddef.h>

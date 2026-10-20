@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - main header
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * Implements the usual Arduino API (pinMode, digitalWrite, analogRead, delay,
  * millis, Serial ...) for the OBC-STD Minifs board (ATSAMD51J20A).

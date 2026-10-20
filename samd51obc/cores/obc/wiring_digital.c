@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - digital I/O, pulseIn, shiftIn/shiftOut
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #include "obc_internal.h"
 

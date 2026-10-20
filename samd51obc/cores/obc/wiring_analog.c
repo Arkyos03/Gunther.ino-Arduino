@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - analogRead() (ADC0/ADC1) and analogWrite() (TCC PWM)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * analogRead : 0..3.3 V (reference = VDDANA), default resolution 10 bits
  *              like on classic Arduino boards, up to 12 bits.

@@ -4,7 +4,7 @@ OBC-STD - compile a sketch outside the Arduino IDE, using the same flags as plat
 Used to test the core in CI / without the IDE.
 
 usage: python3 tools/test_build.py path/to/sketch.ino [build_dir]
-Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License
+Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License
 """
 import os, re, subprocess, sys, pathlib
 

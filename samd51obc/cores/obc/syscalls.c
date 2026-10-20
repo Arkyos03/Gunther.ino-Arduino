@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - minimal newlib system calls
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #include <sys/stat.h>
 #include <errno.h>

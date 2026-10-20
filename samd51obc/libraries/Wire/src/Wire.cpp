@@ -1,6 +1,6 @@
 /*
  * OBC-STD - Wire (I2C master) library
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #include "Wire.h"
 #include "obc_internal.h"

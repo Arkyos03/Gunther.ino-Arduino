@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - startup code for ATSAMD51J20A
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * Vector table generated from the device vector layout (DeviceVectors in samd51j20a.h).
  * Every handler is a weak alias of Default_Handler and can be overridden.

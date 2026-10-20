@@ -1,6 +1,6 @@
 /*
  * OBC-STD - Wire (I2C master) library, Arduino compatible API
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * Wire : SERCOM5, SDA = PB02, SCL = PB03 (BMP390 at 0x76 + external sensors)
  */

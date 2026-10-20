@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - Print class (print / println / printf)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #ifndef OBC_PRINT_H
 #define OBC_PRINT_H

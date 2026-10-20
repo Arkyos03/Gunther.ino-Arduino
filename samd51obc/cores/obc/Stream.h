@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - Stream class (reading with timeout, parsing)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #ifndef OBC_STREAM_H
 #define OBC_STREAM_H

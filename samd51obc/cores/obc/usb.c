@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - USB device (CDC serial) built on TinyUSB (MIT)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * The Arduino IDE resets the board into the bootloader by opening the
  * serial port at 1200 baud then closing it ("1200 bps touch").

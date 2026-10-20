@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - internal helpers (not part of the public API)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #ifndef OBC_INTERNAL_H
 #define OBC_INTERNAL_H

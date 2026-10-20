@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - Stream class
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #include "Arduino.h"
 #include "Stream.h"

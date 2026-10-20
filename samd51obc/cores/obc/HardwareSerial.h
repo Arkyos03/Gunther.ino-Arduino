@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - common base class of Serial (USB) and Serial1 (UART)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #ifndef OBC_HARDWARESERIAL_H
 #define OBC_HARDWARESERIAL_H

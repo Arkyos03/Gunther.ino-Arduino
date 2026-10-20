@@ -12,7 +12,7 @@ Output (in dist/):
   obc-samd51obc-<version>.tar.bz2
   package_obc_index.json   -> its URL goes in Arduino IDE > Preferences >
                               "Additional boards manager URLs"
-Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License
+Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License
 """
 import hashlib, json, pathlib, re, sys, tarfile
 

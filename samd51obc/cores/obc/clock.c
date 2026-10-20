@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - clock configuration
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  *   GCLK0 : 120 MHz  CPU            (DPLL0, reference = GCLK5)
  *   GCLK1 : 48 MHz   peripherals    (DFLL48M, USB clock recovery)

@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - external interrupts (attachInterrupt)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * Each EXTINT line (0..15) can serve one pin at a time.
  */

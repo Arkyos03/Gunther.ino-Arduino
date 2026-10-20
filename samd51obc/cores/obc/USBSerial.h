@@ -1,6 +1,6 @@
 /*
  * OBC-STD Arduino core - "Serial" = USB virtual serial port (CDC)
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  *
  * Serial.print() never blocks the program when no PC is connected:
  * the data is simply dropped (important during a flight!).

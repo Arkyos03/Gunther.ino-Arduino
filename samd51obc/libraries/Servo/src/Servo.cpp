@@ -1,6 +1,6 @@
 /*
  * OBC-STD - Servo library
- * Copyright (c) 2026 Damien Fauconnier / AIR ESIEA - MIT License (see LICENSE)
+ * Copyright (c) 2026 Arkyos03 for AIR ESIEA - MIT License (see LICENSE)
  */
 #include "Servo.h"
 #include "obc_internal.h"
