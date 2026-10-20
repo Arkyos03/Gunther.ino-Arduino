@@ -2,24 +2,24 @@
   "packages": [
     {
       "name": "obc",
-      "maintainer": "AIR ESIEA",
-      "websiteURL": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.1",
+      "maintainer": "Arkyos03 for AIR ESIEA",
+      "websiteURL": "https://github.com/Arkyos03/OBC-Arduino",
       "email": "",
       "help": {
-        "online": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.1"
+        "online": "https://github.com/Arkyos03/OBC-Arduino"
       },
       "platforms": [
         {
           "name": "OBC-STD Minifs (AIR ESIEA)",
           "architecture": "samd51obc",
-          "version": "0.1.1",
+          "version": "0.1.2",
           "category": "Contributed",
-          "url": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.1/obc-samd51obc-0.1.1.tar.bz2",
-          "archiveFileName": "obc-samd51obc-0.1.1.tar.bz2",
-          "checksum": "SHA-256:b0eee46f7cb21d2578eccd043f9afa91c04b709f87a7ef8aa8e60784eea1de4b",
-          "size": "424803",
+          "url": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.2/obc-samd51obc-0.1.2.tar.bz2",
+          "archiveFileName": "obc-samd51obc-0.1.2.tar.bz2",
+          "checksum": "SHA-256:8a70cf0e8937a1c213a7b8eceb39059cc59387431aba946d4cd9089a0f327393",
+          "size": "423842",
           "help": {
-            "online": "https://github.com/Arkyos03/OBC-Arduino/releases/download/v0.1.1"
+            "online": "https://github.com/Arkyos03/OBC-Arduino"
           },
           "boards": [
             {
