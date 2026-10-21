@@ -6,7 +6,7 @@
 
 *by Arkyos03 for AIR ESIEA*
 
-![Version](https://img.shields.io/badge/version-0.1.2-blue)
+![Version](https://img.shields.io/badge/version-0.1.3-blue)
 ![Arduino](https://img.shields.io/badge/Arduino-IDE%202.x-00979D?logo=arduino&logoColor=white)
 ![MCU](https://img.shields.io/badge/MCU-ATSAMD51J20A-orange)
 ![Licence](https://img.shields.io/badge/licence-MIT-green)
@@ -24,7 +24,7 @@
 | 🧭 **Centrale inertielle** | BMI088 (SPI) : accéléromètre + gyroscope |
 | 💾 **Stockage** | Carte micro SD |
 | ⚙️ **Sorties** | 4 servos, 4 LED, buzzer |
-| 🔌 **Entrées** | 4 switchs, 2 jacks, mesure de la batterie |
+| 🔌 **Entrées** | 4 switchs, 1 jack, mesure de la batterie |
 | 🔋 **Alimentation** | Batterie 9 V ou USB-C |
 
 ---
@@ -49,7 +49,7 @@ C'est prêt : on programme la carte comme un Arduino classique.
 |---|---|
 | `LED_1` … `LED_4` | LED sur bornier |
 | `SWITCH_1` … `SWITCH_4` | Switchs sur bornier |
-| `JACK_1`, `JACK_2` | Jacks de décollage |
+| `JACK_1` | Jack de décollage |
 | `SERVO_1` … `SERVO_4` | Servomoteurs |
 | `BUZZER` | Buzzer de la carte |
 | `Serial` | Moniteur série (USB) |
@@ -57,6 +57,7 @@ C'est prêt : on programme la carte comme un Arduino classique.
 | `Wire` | Bus I2C (BMP390 + capteurs externes) |
 | `SPI` · `SD_CS` | Carte micro SD |
 | `SPI1` · `BMI088_ACCEL_CS` · `BMI088_GYRO_CS` | Centrale inertielle |
+| `SPI1` · `SPI1_CS_EXT` | Capteur SPI externe |
 
 ---
 

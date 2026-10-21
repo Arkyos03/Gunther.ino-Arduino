@@ -1,4 +1,4 @@
-// Test complet de la carte : LEDs, switchs, jacks, carte SD, batterie, bus I2C et SPI
+// Test complet de la carte : LEDs, switchs, jack, carte SD, batterie, bus I2C et SPI
 
 #include <OBC.h>
 #include <Wire.h>
@@ -48,10 +48,10 @@ void loop() {
   OBC.led(led, true);
   led = (led % 4) + 1;
 
-  Serial.printf("Batterie %.2f V | SD %s | SW %d%d%d%d | JACK %d%d\n",
+  Serial.printf("Batterie %.2f V | SD %s | SW %d%d%d%d | JACK %d\n",
                 OBC.batteryVoltage(),
                 OBC.sdCardPresent() ? "oui" : "non",
                 OBC.switchClosed(1), OBC.switchClosed(2), OBC.switchClosed(3), OBC.switchClosed(4),
-                OBC.jackPlugged(1), OBC.jackPlugged(2));
+                OBC.jackPlugged(1));
   delay(500);
 }

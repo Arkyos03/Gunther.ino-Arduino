@@ -7,8 +7,10 @@
  *   void loop()  { if (OBC.liftoff()) OBC.led(1, true); }
  *
  * Wiring on the terminal blocks:
- *   - switches and jacks are connected between the pin and GND
+ *   - switches are connected between the pin and GND
  *     (internal pull-up: open = HIGH, closed = LOW)
+ *   - the launch jack is connected between VCC and the pin
+ *     (10k pull-down on the board: plugged = HIGH, removed = LOW)
  *   - LEDs between the pin and GND, with a series resistor
  */
 #ifndef OBC_LIB_H
@@ -30,7 +32,7 @@ public:
   /* Switches: n = 1..4, true when the switch is closed (pin to GND) */
   bool switchClosed(uint8_t n);
 
-  /* Jacks: n = 1..2, true when the jack is plugged (pin to GND) */
+  /* Jack: n = 1, true when the jack is plugged (pin tied to VCC) */
   bool jackPlugged(uint8_t n);
   /* true as soon as the launch jack (JACK_1) has been pulled out */
   bool liftoff();

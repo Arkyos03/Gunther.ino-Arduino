@@ -27,8 +27,8 @@
 /* Terminal blocks : LEDs (outputs) */
 #define LED_1           0u    /* PB10 - PWM */
 #define LED_2           1u    /* PB11 - PWM */
-#define LED_3           2u    /* PB22 */
-#define LED_4           3u    /* PB23 */
+#define LED_3           2u    /* PB23 */
+#define LED_4           3u    /* PB22 */
 
 /* Terminal blocks : switches (inputs, interrupt capable) */
 #define SWITCH_1        4u    /* PB04 */
@@ -36,9 +36,13 @@
 #define SWITCH_3        6u    /* PB06 */
 #define SWITCH_4        7u    /* PB07 */
 
-/* Terminal blocks : jacks (inputs, interrupt capable) */
+/* Terminal block : launch jack (input, interrupt capable)
+ * J17 = VCC / signal, 10k pull-down on the board: jack plugged = HIGH, removed = LOW */
 #define JACK_1          8u    /* PB08 */
-#define JACK_2          9u    /* PB09 */
+
+/* Extra chip select on the sensor SPI bus (SPI1), for an external SPI sensor */
+#define SPI1_CS_EXT     9u    /* PA11 */
+#define SPI_CS_EXT      SPI1_CS_EXT   /* same name as on the schematic */
 
 /* Servo connectors (PWM on TCC1, 50 Hz) */
 #define SERVO_1         10u   /* PA18 */
@@ -88,12 +92,12 @@
 #define PIN_EXT_PA08    40u
 #define PIN_EXT_PA09    41u
 #define PIN_EXT_PA10    42u
-#define PIN_EXT_PA11    43u
+#define PIN_EXT_PB09    43u   /* ADC0 AIN3 / ADC1 AIN1 */
 #define PIN_EXT_PB01    44u
 #define PIN_EXT_PB31    45u
 
 #define NUM_DIGITAL_PINS    46u
-#define NUM_ANALOG_INPUTS   7u
+#define NUM_ANALOG_INPUTS   6u
 
 /* Analog inputs (analogRead) */
 #define A0              VBAT_SENSE
@@ -102,7 +106,6 @@
 #define A3              SWITCH_3
 #define A4              SWITCH_4
 #define A5              JACK_1
-#define A6              JACK_2
 static const uint8_t PIN_A0 = A0;
 
 /* Compatibility names used by examples and libraries */

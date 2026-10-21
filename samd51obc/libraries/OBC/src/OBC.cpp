@@ -8,13 +8,13 @@ OBCBoard OBC;
 
 static const uint8_t s_leds[4]     = { LED_1, LED_2, LED_3, LED_4 };
 static const uint8_t s_switches[4] = { SWITCH_1, SWITCH_2, SWITCH_3, SWITCH_4 };
-static const uint8_t s_jacks[2]    = { JACK_1, JACK_2 };
+static const uint8_t s_jacks[1]    = { JACK_1 };
 
 void OBCBoard::begin()
 {
   for (uint8_t i = 0; i < 4; i++) { pinMode(s_leds[i], OUTPUT); digitalWrite(s_leds[i], LOW); }
   for (uint8_t i = 0; i < 4; i++) pinMode(s_switches[i], INPUT_PULLUP);
-  for (uint8_t i = 0; i < 2; i++) pinMode(s_jacks[i], INPUT_PULLUP);
+  pinMode(JACK_1, INPUT_PULLDOWN);          /* 10k pull-down on the board as well */
   pinMode(SD_DETECT, INPUT_PULLUP);
   pinMode(BUZZER, OUTPUT);
   digitalWrite(BUZZER, LOW);
@@ -58,8 +58,8 @@ bool OBCBoard::switchClosed(uint8_t n)
 
 bool OBCBoard::jackPlugged(uint8_t n)
 {
-  if (n < 1 || n > 2) return false;
-  return digitalRead(s_jacks[n - 1]) == LOW;
+  if (n != 1) return false;
+  return digitalRead(s_jacks[n - 1]) == HIGH;      /* jack plugged: pin tied to VCC */
 }
 
 bool OBCBoard::liftoff()

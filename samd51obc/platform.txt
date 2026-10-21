@@ -4,7 +4,7 @@
 # Specification: https://arduino.github.io/arduino-cli/latest/platform-specification/
 
 name=OBC-STD Minifs (AIR ESIEA)
-version=0.1.2
+version=0.1.3
 
 # ------------------------------------------------------------------ toolchain
 compiler.warning_flags=-w
