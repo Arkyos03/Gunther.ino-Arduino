@@ -3,10 +3,10 @@
     {
       "name": "gunther",
       "maintainer": "Arkyos03 for AIR ESIEA",
-      "websiteURL": "https://github.com/Arkyos03/Gunther.ino-Arduino",
+      "websiteURL": "https://github.com/Arkyos03/Gunther-Arduino",
       "email": "",
       "help": {
-        "online": "https://github.com/Arkyos03/Gunther.ino-Arduino"
+        "online": "https://github.com/Arkyos03/Gunther-Arduino"
       },
       "platforms": [
         {
@@ -14,12 +14,12 @@
           "architecture": "samd51gunther",
           "version": "0.1.4",
           "category": "Contributed",
-          "url": "https://github.com/Arkyos03/Gunther.ino-Arduino/releases/download/v0.1.4/gunther-samd51-0.1.4.tar.bz2",
+          "url": "https://github.com/Arkyos03/Gunther-Arduino/releases/download/v0.1.4/gunther-samd51-0.1.4.tar.bz2",
           "archiveFileName": "gunther-samd51-0.1.4.tar.bz2",
-          "checksum": "SHA-256:99ac255d08cf1cfbc0d70f860ebfbb43fe5ef60f4f19609fbac0c5be6069f002",
-          "size": "642041",
+          "checksum": "SHA-256:ac9ee4d47b93851e285c0ef1cecfbb158d8aa6efb1d16134c313a0e1230c5df1",
+          "size": "642156",
           "help": {
-            "online": "https://github.com/Arkyos03/Gunther.ino-Arduino"
+            "online": "https://github.com/Arkyos03/Gunther-Arduino"
           },
           "boards": [
             {
