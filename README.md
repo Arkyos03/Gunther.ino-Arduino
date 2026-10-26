@@ -1,139 +1,189 @@
 <div align="center">
 
-# 🚀 Gunther.ino
+# Gunther.ino : carte minifusée (SAMD51)
 
-**Les cartes électroniques des fusées d'AIR ESIEA, programmables avec l'Arduino IDE**
+**Ordinateur de bord standardisé pour minifusées**
+
+Cette carte fait partie de la famille Gunther.ino : elle utilise la [bibliothèque commune `Gunther`](../../README.md).
 
 *by Arkyos03 for AIR ESIEA*
 
+![Version](https://img.shields.io/badge/version-0.1.5-blue)
 ![Arduino](https://img.shields.io/badge/Arduino-IDE%202.x-00979D?logo=arduino&logoColor=white)
+![MCU](https://img.shields.io/badge/MCU-ATSAMD51J20A-orange)
 ![Licence](https://img.shields.io/badge/licence-MIT-green)
 
 </div>
 
 ---
 
-## 👋 C'est quoi ?
+## La carte
 
-Gunther.ino, c'est la famille de cartes électroniques qu'on utilise dans les fusées d'AIR ESIEA :
-la carte des minifusées pour commencer, et bientôt une carte plus costaude pour les fusées expérimentales.
-
-L'idée de ce dépôt, c'est que **toutes ces cartes se programment de la même manière**. Il y a un seul lien
-à ajouter dans l'Arduino IDE, une seule bibliothèque `Gunther`, et les mêmes noms de broches partout
-(`LED_1`, `JACK_1`, `SERVO_1`, `BUZZER`...). Un programme écrit pour la minifusée peut donc être repris
-sur une autre carte Gunther.ino sans tout réécrire : on change juste la carte dans **Outils › Type de carte**.
-
----
-
-## 🧩 Les cartes
-
-| Carte | Pour quelle fusée | Microcontrôleur | Où en est-on | Détails |
-|---|---|---|---|---|
-| **Gunther.ino (Rev A)** | Minifusée | ATSAMD51J20A | Disponible, v0.1.5 | [platforms/samd51](platforms/samd51/README.md) |
-| *Carte expérimentale* | Fusée expérimentale | STM32F4 | En préparation | [platforms/stm32](platforms/stm32/README.md) |
+| | |
+|---|---|
+| **Processeur** | ATSAMD51J20A, 120 MHz, 1 Mo de flash |
+| **Baromètre** | BMP390 / BMP388 / SPL07 (I2C) : pression, température, altitude |
+| **Centrale inertielle** | BMI088 (SPI) : accéléromètre + gyroscope |
+| **Stockage** | Carte micro SD |
+| **Sorties** | 4 servos, 4 LED, LED RGB d'état, buzzer |
+| **Entrées** | 4 switchs, 1 jack, mesure de la batterie |
+| **Alimentation** | Batterie 9 V ou USB-C |
 
 ---
 
-## 📥 Installer les cartes dans l'Arduino IDE
+## Installation
 
-1. Ouvre **Fichier › Préférences**.
-2. Dans **URL de gestionnaire de cartes supplémentaires**, colle ce lien :
+1. Dans l'Arduino IDE, ouvrir **Fichier › Préférences**.
+2. Dans **URL de gestionnaire de cartes supplémentaires**, coller :
    ```
    https://raw.githubusercontent.com/Arkyos03/Gunther.ino-Arduino/main/package_gunther_index.json
    ```
-3. Va dans **Outils › Type de carte › Gestionnaire de cartes**, cherche **Gunther.ino** et installe le paquet de ta carte.
-4. Sélectionne ta carte dans **Outils › Type de carte**, choisis le port USB, et c'est parti.
+3. Ouvrir **Outils › Type de carte › Gestionnaire de cartes**, chercher **Gunther.ino** et cliquer sur **Installer**.
+4. Choisir **Outils › Type de carte › Gunther.ino (Rev A)**, puis le port USB.
 
-Pas besoin d'installer la bibliothèque `Gunther` à part : elle arrive avec le paquet.
+C'est prêt : on programme la carte comme un Arduino classique.
 
 ---
 
-## ⚡ Programmer la carte
+## Brochage
 
-Tu as deux façons de faire, et tu peux mélanger les deux dans le même programme.
+| Nom dans le code | Rôle |
+|---|---|
+| `LED_BUILTIN` | LED RGB de la carte (SK6805, PA08) |
+| `LED_1` … `LED_4` | LED sur bornier |
+| `SWITCH_1` … `SWITCH_4` | Switchs sur bornier |
+| `JACK_1` | Jack de décollage |
+| `SERVO_1` … `SERVO_4` | Servomoteurs |
+| `BUZZER` | Buzzer de la carte |
+| `VBAT_SENSE` (`A0`) | Tension de la pile ÷ 4 |
+| `BMP390_INT` | Interruption du baromètre |
+| `BMI088_ACCEL_INT` · `BMI088_GYRO_INT` | Interruptions de la centrale |
+| `Serial` | Moniteur série (USB) |
+| `Serial1` | UART d'extension |
+| `Wire` | Bus I2C (BMP390 + capteurs externes) |
+| `SPI` · `SD_CS` | Carte micro SD |
+| `SPI1` · `BMI088_ACCEL_CS` · `BMI088_GYRO_CS` | Centrale inertielle |
+| `SPI1` · `SPI1_CS_EXT` | Capteur SPI externe |
 
-**Le mode simplifié**, pour aller vite : tu inclus `Gunther.h` et chaque action tient en une ligne.
-La lecture des capteurs, la détection du décollage et de l'apogée, l'enregistrement sur la carte SD :
-tout est déjà écrit et testé. C'est ce qu'on conseille pour un premier vol.
+---
+
+## Deux façons de programmer la carte
+
+| | Mode simplifié | Mode classique |
+|---|---|---|
+| Pour qui | Débutants, premiers vols | Ceux qui veulent tout coder eux-mêmes |
+| Comment | `#include <Gunther.h>` puis `Gunther.altitude()`, `Gunther.apogee()`... | Code Arduino standard, comme une Nano, avec les noms des broches |
+| Exemples | **Fichier › Exemples › Gunther** | **Fichier › Exemples › Gunther Classique** |
+
+On peut aussi mélanger les deux dans le même programme.
+
+### Mode simplifié
 
 ```cpp
 #include <Gunther.h>
 
 void setup() {
-  Gunther.begin();          // démarre la carte et prend l'altitude du sol
-  Gunther.servoClose(1);    // trappe fermée
-  Gunther.selfTest();       // 3 bips = tout va bien
-  Gunther.logBegin();       // nouveau fichier vol_XXX.csv sur la carte SD
+  Gunther.begin();
+  Gunther.servoClose(1);            // trappe fermée
+  Gunther.selfTest();               // 3 bips = tout est OK
+  Gunther.logBegin();               // nouveau fichier vol_XXX.csv
 }
 
 void loop() {
   Gunther.update();
-  Gunther.logFlight();      // une ligne de données par tour
-  if (Gunther.apogee()) Gunther.servoOpen(1);   // on ouvre le parachute
+  Gunther.logFlight();              // altitude, accéléros, gyros... sur la carte SD
+  if (Gunther.apogee()) {
+    Gunther.servoOpen(1);           // ouverture du parachute
+  }
 }
 ```
 
-**Le mode classique**, si tu préfères tout coder toi-même : la carte se programme comme une Arduino Nano,
-avec `pinMode`, `digitalWrite`, `Wire`, `SPI`... et les noms des broches de la carte.
+| Fonction | Effet |
+|---|---|
+| `Gunther.begin()` | Prépare la carte, démarre les capteurs, prend l'altitude du sol |
+| `Gunther.update()` | Lit les capteurs et suit le vol (à appeler dans `loop()`) |
+| `Gunther.selfTest()` | Teste capteurs, carte SD et pile (3 bips = OK) |
+| `Gunther.altitude()` · `Gunther.pressure()` · `Gunther.temperature()` · `Gunther.verticalSpeed()` | Baromètre |
+| `Gunther.accel(x, y, z)` · `Gunther.gyro(x, y, z)` · `Gunther.gForce()` | Centrale inertielle BMI088 |
+| `Gunther.liftoff()` · `Gunther.apogee()` · `Gunther.landed()` · `Gunther.flightTime()` · `Gunther.maxAltitude()` | Phases du vol |
+| `Gunther.servoOpen(1)` · `Gunther.servoClose(1)` · `Gunther.servoDetach(1)` | Servos d'éjection |
+| `Gunther.logBegin()` · `Gunther.logFlight()` · `Gunther.log(a, b...)` | Enregistrement sur la carte SD (`vol_001.csv`...) |
+| `Gunther.printFlight(Serial1)` | Même ligne envoyée sur un port série (radio de télémétrie) |
+| `Gunther.led(1, true)` · `Gunther.switchClosed(2)` · `Gunther.jackPlugged()` | LED, switchs, jack |
+| `Gunther.beep()` · `Gunther.beepAltitude()` · `Gunther.batteryVoltage()` · `Gunther.lowBattery()` | Buzzer et pile |
+| `Gunther.rgb(r, v, b)` · `Gunther.statusLed(true)` · `Gunther.setStatusLed(broche)` | LED RGB : couleur libre, retour aux animations, LED d'état externe |
 
-Les exemples sont dans **Fichier › Exemples › Gunther** (mode simplifié) et **Gunther Classique** (mode classique).
-Toutes les fonctions sont détaillées dans le README de chaque carte et dans les manuels du dossier `docs/`.
+#### LED RGB d'état
+
+Après `Gunther.begin()`, la LED RGB de la carte montre toute seule ce qui se passe :
+
+| LED | Signification |
+|---|---|
+| Bleu qui respire | Démarrage |
+| 3 flashs verts | Auto-test OK |
+| Flashs rouges | Erreur : 1 = baromètre, 2 = centrale, 3 = carte SD, 4 = pile |
+| Vert qui respire | Prête, enregistrement en cours |
+| Cyan qui respire | Prête, sans enregistrement |
+| Orange qui clignote | Pile faible |
+| Flash blanc | Décollage, apogée |
+| Bleu rapide | Montée |
+| Violet rapide | Descente |
+| Double flash blanc | Posée (balise pour retrouver la fusée) |
+
+### Mode classique
+
+```cpp
+#include <Servo.h>
+
+Servo trappe;
+
+void setup() {
+  pinMode(LED_1, OUTPUT);
+  pinMode(JACK_1, INPUT_PULLDOWN);
+  trappe.attach(SERVO_1);
+}
+
+void loop() {
+  if (digitalRead(JACK_1) == LOW) {    // jack arraché
+    digitalWrite(LED_1, HIGH);
+    tone(BUZZER, 4000, 100);
+  }
+}
+```
+
+| Disponible | |
+|---|---|
+| Entrées / sorties | `pinMode` · `digitalWrite` · `digitalRead` · `attachInterrupt` · `pulseIn` · `shiftOut` |
+| LED RGB | `digitalWrite(LED_BUILTIN, HIGH)` (blanc) · `rgbLedWrite(LED_BUILTIN, r, v, b)` · aussi pour une WS2812 externe |
+| Analogique | `analogRead` · `analogReadResolution` · `analogReference` · `analogWrite` (PWM, et vrai analogique sur PA02 / PA05) |
+| Temps, sons | `millis` · `micros` · `delay` · `tone` · `noTone` |
+| Communication | `Serial` (USB) · `Serial1` (UART) · `Wire` (I2C maître et esclave) · `SPI` (carte SD) · `SPI1` (BMI088 et capteur externe) |
+| Bibliothèques incluses | `Servo` · `SdFat` · `EEPROM` (4 Ko, gardée après coupure) · `Watchdog` |
+
+Les bibliothèques **Adafruit BMP3XX** et **Bolder Flight BMI088** du gestionnaire de bibliothèques fonctionnent aussi.
 
 ---
 
-## 🗂️ Comment le dépôt est rangé
+## Menu Outils
 
-```
-libraries/        ce qui est commun à toutes les cartes
-  Gunther/        la bibliothèque du mode simplifié
-  SdFat/          la gestion de la carte SD
-
-platforms/        une plateforme par famille de microcontrôleur
-  samd51/         tout ce qui est propre au SAMD51 (cœur Arduino, brochage, bootloader...)
-  stm32/          la future plateforme STM32
-
-docs/             les manuels d'utilisation
-tools/            les scripts pour compiler et publier
-package_gunther_index.json    le fichier que lit l'Arduino IDE
-```
-
-La bibliothèque `Gunther` est écrite une seule fois pour toutes les cartes. Ce qui dépend vraiment du
-microcontrôleur (la LED RGB, la mesure de la pile...) est isolé dans de petits fichiers `Gunther_Port_*.cpp`,
-un par plateforme.
+| Menu | Choix |
+|---|---|
+| **Optimisation** | Petite taille (par défaut), Rapide, Plus rapide, Débogage |
+| **Programmateur** | CMSIS-DAP (Raspberry Pi Debug Probe, Atmel-ICE...) ou ST-Link V2 : graver le bootloader, téléverser sans USB, déboguer |
+| **Bouton Déboguer** (IDE 2) | Points d'arrêt et registres du SAMD51 avec une sonde SWD (choisir *Optimisation › Débogage*) |
 
 ---
 
-## ➕ Ajouter une nouvelle carte
+## Documentation
 
-- **Si elle utilise un microcontrôleur déjà géré**, il suffit de l'ajouter dans le `boards.txt` de sa plateforme
-  et de décrire son brochage dans `variants/`.
-- **Si c'est un nouveau microcontrôleur**, on crée un nouveau dossier dans `platforms/`
-  (le README de [platforms/stm32](platforms/stm32/README.md) explique comment).
-
-Pour que la bibliothèque `Gunther` fonctionne dessus, le brochage de la carte doit définir au minimum :
-`LED_1` à `LED_4`, `SWITCH_1` à `SWITCH_4`, `JACK_1`, `SERVO_1` à `SERVO_4`, `BUZZER`, `VBAT_SENSE`,
-`VBAT_DIVIDER_RATIO`, `SD_CS`, `BMI088_ACCEL_CS` et `BMI088_GYRO_CS`.
-
-Selon la carte, on peut aussi définir `LED_RGB` (LED d'état), `SD_DETECT` avec `SD_DETECT_WORKS`,
-et les bus utilisés : `GUNTHER_BARO_WIRE`, `GUNTHER_IMU_SPI`, `GUNTHER_SD_SPI`
-(par défaut `Wire`, `SPI1` et `SPI`).
+Manuels d'utilisation (Word) dans [`docs/samd51`](../../docs/samd51) : mode simplifié et mode classique.
 
 ---
 
-## 🚀 Publier une nouvelle version
+## En cas de problème
 
-```
-python3 tools/make_release.py samd51
-```
-
-Le script prépare l'archive de la plateforme dans `dist/` et met à jour `package_gunther_index.json`. Ensuite :
-
-1. Sur GitHub, crée une release nommée **`v<version>`** (par exemple `v0.1.5`) et ajoute-y l'archive.
-   Si deux plateformes sortent avec le même numéro de version, leurs archives vont dans la même release.
-2. Fais un commit et un push de `package_gunther_index.json`.
-
-Chaque plateforme avance à son rythme : sortir une nouvelle version de la carte STM32 ne touche pas à celle
-de la minifusée, et les anciennes versions restent installables.
+Si le téléversement échoue (programme planté) :
+**appuyer deux fois rapidement sur RESET**. La LED 1 pulse, la carte est prête : relancer le téléversement.
 
 ---
 
