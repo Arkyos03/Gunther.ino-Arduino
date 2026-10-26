@@ -14,7 +14,7 @@
           "architecture": "samd51gunther",
           "version": "0.1.5",
           "category": "Contributed",
-          "url": "https://github.com/Arkyos03/Gunther.ino-Arduino/releases/download/samd51-v0.1.5/gunther-samd51-0.1.5.tar.bz2",
+          "url": "https://github.com/Arkyos03/Gunther.ino-Arduino/releases/download/v0.1.5/gunther-samd51-0.1.5.tar.bz2",
           "archiveFileName": "gunther-samd51-0.1.5.tar.bz2",
           "checksum": "SHA-256:f5b86b2ca44f6cabb43b5571d3611db13b497558c07fa9660fca620d1f8cfa10",
           "size": "651425",
