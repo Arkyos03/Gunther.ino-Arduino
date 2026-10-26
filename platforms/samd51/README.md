@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 Gunther.ino : carte minifusée (SAMD51)
+# Gunther.ino : carte minifusée (SAMD51)
 
 **Ordinateur de bord standardisé pour minifusées**
 
@@ -17,21 +17,21 @@ Cette carte fait partie de la famille Gunther.ino : elle utilise la [bibliothèq
 
 ---
 
-## ✨ La carte
+## La carte
 
 | | |
 |---|---|
-| 🧠 **Processeur** | ATSAMD51J20A, 120 MHz, 1 Mo de flash |
-| 🌡️ **Baromètre** | BMP390 / BMP388 / SPL07 (I2C) : pression, température, altitude |
-| 🧭 **Centrale inertielle** | BMI088 (SPI) : accéléromètre + gyroscope |
-| 💾 **Stockage** | Carte micro SD |
-| ⚙️ **Sorties** | 4 servos, 4 LED, LED RGB d'état, buzzer |
-| 🔌 **Entrées** | 4 switchs, 1 jack, mesure de la batterie |
-| 🔋 **Alimentation** | Batterie 9 V ou USB-C |
+| **Processeur** | ATSAMD51J20A, 120 MHz, 1 Mo de flash |
+| **Baromètre** | BMP390 / BMP388 / SPL07 (I2C) : pression, température, altitude |
+| **Centrale inertielle** | BMI088 (SPI) : accéléromètre + gyroscope |
+| **Stockage** | Carte micro SD |
+| **Sorties** | 4 servos, 4 LED, LED RGB d'état, buzzer |
+| **Entrées** | 4 switchs, 1 jack, mesure de la batterie |
+| **Alimentation** | Batterie 9 V ou USB-C |
 
 ---
 
-## 📥 Installation
+## Installation
 
 1. Dans l'Arduino IDE, ouvrir **Fichier › Préférences**.
 2. Dans **URL de gestionnaire de cartes supplémentaires**, coller :
@@ -45,7 +45,7 @@ C'est prêt : on programme la carte comme un Arduino classique.
 
 ---
 
-## 📌 Brochage
+## Brochage
 
 | Nom dans le code | Rôle |
 |---|---|
@@ -67,7 +67,7 @@ C'est prêt : on programme la carte comme un Arduino classique.
 
 ---
 
-## 🧭 Deux façons de programmer la carte
+## Deux façons de programmer la carte
 
 | | Mode simplifié | Mode classique |
 |---|---|---|
@@ -77,7 +77,7 @@ C'est prêt : on programme la carte comme un Arduino classique.
 
 On peut aussi mélanger les deux dans le même programme.
 
-### ⚡ Mode simplifié
+### Mode simplifié
 
 ```cpp
 #include <Gunther.h>
@@ -113,24 +113,24 @@ void loop() {
 | `Gunther.beep()` · `Gunther.beepAltitude()` · `Gunther.batteryVoltage()` · `Gunther.lowBattery()` | Buzzer et pile |
 | `Gunther.rgb(r, v, b)` · `Gunther.statusLed(true)` · `Gunther.setStatusLed(broche)` | LED RGB : couleur libre, retour aux animations, LED d'état externe |
 
-#### 🚦 LED RGB d'état
+#### LED RGB d'état
 
 Après `Gunther.begin()`, la LED RGB de la carte montre toute seule ce qui se passe :
 
 | LED | Signification |
 |---|---|
-| 🔵 bleu qui respire | Démarrage |
-| 🟢 3 flashs verts | Auto-test OK |
-| 🔴 flashs rouges | Erreur : 1 = baromètre, 2 = centrale, 3 = carte SD, 4 = pile |
-| 🟢 vert qui respire | Prête, enregistrement en cours |
-| 🩵 cyan qui respire | Prête, sans enregistrement |
-| 🟠 orange qui clignote | Pile faible |
-| ⚪ flash blanc | Décollage, apogée |
-| 🔵 bleu rapide | Montée |
-| 🟣 violet rapide | Descente |
-| ⚪ double flash blanc | Posée (balise pour retrouver la fusée) |
+| Bleu qui respire | Démarrage |
+| 3 flashs verts | Auto-test OK |
+| Flashs rouges | Erreur : 1 = baromètre, 2 = centrale, 3 = carte SD, 4 = pile |
+| Vert qui respire | Prête, enregistrement en cours |
+| Cyan qui respire | Prête, sans enregistrement |
+| Orange qui clignote | Pile faible |
+| Flash blanc | Décollage, apogée |
+| Bleu rapide | Montée |
+| Violet rapide | Descente |
+| Double flash blanc | Posée (balise pour retrouver la fusée) |
 
-### 🔧 Mode classique
+### Mode classique
 
 ```cpp
 #include <Servo.h>
@@ -164,7 +164,7 @@ Les bibliothèques **Adafruit BMP3XX** et **Bolder Flight BMI088** du gestionnai
 
 ---
 
-## 🧰 Menu Outils
+## Menu Outils
 
 | Menu | Choix |
 |---|---|
@@ -174,13 +174,13 @@ Les bibliothèques **Adafruit BMP3XX** et **Bolder Flight BMI088** du gestionnai
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 Manuels d'utilisation (Word) dans [`docs/samd51`](../../docs/samd51) : mode simplifié et mode classique.
 
 ---
 
-## 🛠️ En cas de problème
+## En cas de problème
 
 Si le téléversement échoue (programme planté) :
 **appuyer deux fois rapidement sur RESET**. La LED 1 pulse, la carte est prête : relancer le téléversement.
