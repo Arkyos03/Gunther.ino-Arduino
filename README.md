@@ -128,7 +128,8 @@ python3 tools/make_release.py samd51
 
 Le script prépare l'archive de la plateforme dans `dist/` et met à jour `package_gunther_index.json`. Ensuite :
 
-1. Sur GitHub, crée une release nommée **`samd51-v<version>`** (par exemple `samd51-v0.1.5`) et ajoute-y l'archive.
+1. Sur GitHub, crée une release nommée **`v<version>`** (par exemple `v0.1.5`) et ajoute-y l'archive.
+   Si deux plateformes sortent avec le même numéro de version, leurs archives vont dans la même release.
 2. Fais un commit et un push de `package_gunther_index.json`.
 
 Chaque plateforme avance à son rythme : sortir une nouvelle version de la carte STM32 ne touche pas à celle

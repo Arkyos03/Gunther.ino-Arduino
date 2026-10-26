@@ -3,7 +3,7 @@
 #
 # Specification: https://arduino.github.io/arduino-cli/latest/platform-specification/
 
-name=Gunther.ino SAMD51 (AIR ESIEA)
+name=Gunther.ino (AIR ESIEA)
 version=0.1.5
 
 # ------------------------------------------------------------------ toolchain

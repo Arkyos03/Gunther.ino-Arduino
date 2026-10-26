@@ -38,4 +38,4 @@ Quand `platform.txt`, `boards.txt` et `release.json` existent :
 python3 tools/make_release.py stm32
 ```
 
-puis créer la release GitHub `stm32-v<version>` avec l'archive `dist/gunther-stm32-<version>.tar.bz2`.
+puis créer la release GitHub `v<version>` avec l'archive `dist/gunther-stm32-<version>.tar.bz2`.

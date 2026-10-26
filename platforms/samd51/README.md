@@ -38,7 +38,7 @@ Cette carte fait partie de la famille Gunther.ino : elle utilise la [bibliothèq
    ```
    https://raw.githubusercontent.com/Arkyos03/Gunther.ino-Arduino/main/package_gunther_index.json
    ```
-3. Ouvrir **Outils › Type de carte › Gestionnaire de cartes**, chercher **Gunther.ino SAMD51** et cliquer sur **Installer**.
+3. Ouvrir **Outils › Type de carte › Gestionnaire de cartes**, chercher **Gunther.ino** et cliquer sur **Installer**.
 4. Choisir **Outils › Type de carte › Gunther.ino (Rev A)**, puis le port USB.
 
 C'est prêt : on programme la carte comme un Arduino classique.
