@@ -2,7 +2,7 @@
 
 # 🚀 Gunther.ino
 
-**La bibliothèque Arduino commune à toutes les cartes Gunther.ino des fusées d'AIR ESIEA**
+**Les cartes électroniques des fusées d'AIR ESIEA, programmables avec l'Arduino IDE**
 
 *by Arkyos03 for AIR ESIEA*
 
@@ -13,126 +13,126 @@
 
 ---
 
-## 💡 Le principe
+## 👋 C'est quoi ?
 
-Toutes les cartes Gunther.ino (minifusée, fusée expérimentale...) se programment **de la même façon** :
+Gunther.ino, c'est la famille de cartes électroniques qu'on utilise dans les fusées d'AIR ESIEA :
+la carte des minifusées pour commencer, et bientôt une carte plus costaude pour les fusées expérimentales.
 
-- **un seul lien** à coller dans l'Arduino IDE, qui propose toutes les cartes ;
-- **une seule bibliothèque `Gunther`** : le même programme (`Gunther.begin()`, `Gunther.altitude()`,
-  `Gunther.apogee()`, `Gunther.servoOpen(1)`...) fonctionne sur toutes les cartes ;
-- les **mêmes noms de broches** (`LED_1`, `JACK_1`, `SERVO_1`, `BUZZER`...) sur toutes les cartes.
-
-Un programme écrit pour la minifusée se reprend donc tel quel sur une autre carte Gunther.ino :
-seul le choix de la carte change dans **Outils › Type de carte**.
+L'idée de ce dépôt, c'est que **toutes ces cartes se programment de la même manière**. Il y a un seul lien
+à ajouter dans l'Arduino IDE, une seule bibliothèque `Gunther`, et les mêmes noms de broches partout
+(`LED_1`, `JACK_1`, `SERVO_1`, `BUZZER`...). Un programme écrit pour la minifusée peut donc être repris
+sur une autre carte Gunther.ino sans tout réécrire : on change juste la carte dans **Outils › Type de carte**.
 
 ---
 
 ## 🧩 Les cartes
 
-| Carte | Fusée | Microcontrôleur | Paquet à installer | Version | Détails |
-|---|---|---|---|---|---|
-| **Gunther.ino (Rev A)** | Minifusée | ATSAMD51J20A | Gunther.ino SAMD51 | 0.1.5 | [platforms/samd51](platforms/samd51/README.md) |
-| *Carte fusée expérimentale* | Fusée expérimentale | STM32F4 | Gunther.ino STM32 | à venir | [platforms/stm32](platforms/stm32/README.md) |
+| Carte | Pour quelle fusée | Microcontrôleur | Où en est-on | Détails |
+|---|---|---|---|---|
+| **Gunther.ino (Rev A)** | Minifusée | ATSAMD51J20A | Disponible, v0.1.5 | [platforms/samd51](platforms/samd51/README.md) |
+| *Carte expérimentale* | Fusée expérimentale | STM32F4 | En préparation | [platforms/stm32](platforms/stm32/README.md) |
 
 ---
 
-## 📥 Installation (toutes les cartes)
+## 📥 Installer les cartes dans l'Arduino IDE
 
-1. Dans l'Arduino IDE, ouvrir **Fichier › Préférences**.
-2. Dans **URL de gestionnaire de cartes supplémentaires**, coller :
+1. Ouvre **Fichier › Préférences**.
+2. Dans **URL de gestionnaire de cartes supplémentaires**, colle ce lien :
    ```
    https://raw.githubusercontent.com/Arkyos03/Gunther.ino-Arduino/main/package_gunther_index.json
    ```
-3. **Outils › Type de carte › Gestionnaire de cartes** : chercher **Gunther.ino** et installer le paquet de sa carte.
-4. Choisir la carte dans **Outils › Type de carte**, puis le port USB.
+3. Va dans **Outils › Type de carte › Gestionnaire de cartes**, cherche **Gunther.ino** et installe le paquet de ta carte.
+4. Sélectionne ta carte dans **Outils › Type de carte**, choisis le port USB, et c'est parti.
 
-La bibliothèque `Gunther` est installée automatiquement avec chaque paquet : rien d'autre à faire.
+Pas besoin d'installer la bibliothèque `Gunther` à part : elle arrive avec le paquet.
 
 ---
 
-## ⚡ Deux façons de programmer
+## ⚡ Programmer la carte
 
-| | Mode simplifié | Mode classique |
-|---|---|---|
-| Comment | `#include <Gunther.h>` puis `Gunther.begin()`, `Gunther.apogee()`... | Code Arduino standard (`pinMode`, `digitalWrite`, `Wire`, `SPI`...) avec les noms des broches |
-| Commun à toutes les cartes | Oui : même bibliothèque, même programme | Les noms de broches oui, les détails matériels dépendent de la carte |
-| Exemples | **Fichier › Exemples › Gunther** | **Fichier › Exemples › Gunther Classique** |
+Tu as deux façons de faire, et tu peux mélanger les deux dans le même programme.
+
+**Le mode simplifié**, pour aller vite : tu inclus `Gunther.h` et chaque action tient en une ligne.
+La lecture des capteurs, la détection du décollage et de l'apogée, l'enregistrement sur la carte SD :
+tout est déjà écrit et testé. C'est ce qu'on conseille pour un premier vol.
 
 ```cpp
 #include <Gunther.h>
 
 void setup() {
-  Gunther.begin();          // capteurs, altitude du sol
+  Gunther.begin();          // démarre la carte et prend l'altitude du sol
   Gunther.servoClose(1);    // trappe fermée
-  Gunther.selfTest();       // 3 bips = tout est OK
-  Gunther.logBegin();       // nouveau fichier vol_XXX.csv
+  Gunther.selfTest();       // 3 bips = tout va bien
+  Gunther.logBegin();       // nouveau fichier vol_XXX.csv sur la carte SD
 }
 
 void loop() {
   Gunther.update();
-  Gunther.logFlight();      // une ligne de données sur la carte SD
-  if (Gunther.apogee()) Gunther.servoOpen(1);
+  Gunther.logFlight();      // une ligne de données par tour
+  if (Gunther.apogee()) Gunther.servoOpen(1);   // on ouvre le parachute
 }
 ```
 
-La liste complète des fonctions et des animations de la LED d'état est dans le README de chaque carte
-et dans les manuels (`docs/`).
+**Le mode classique**, si tu préfères tout coder toi-même : la carte se programme comme une Arduino Nano,
+avec `pinMode`, `digitalWrite`, `Wire`, `SPI`... et les noms des broches de la carte.
+
+Les exemples sont dans **Fichier › Exemples › Gunther** (mode simplifié) et **Gunther Classique** (mode classique).
+Toutes les fonctions sont détaillées dans le README de chaque carte et dans les manuels du dossier `docs/`.
 
 ---
 
-## 🗂️ Organisation du dépôt
+## 🗂️ Comment le dépôt est rangé
 
 ```
-libraries/                  COMMUN À TOUTES LES CARTES
-  Gunther/                  bibliothèque du mode simplifié (même API partout)
-    src/Gunther_Port.h      ce qui dépend du microcontrôleur (un fichier par plateforme)
-  SdFat/                    carte SD (MIT, Bill Greiman)
+libraries/        ce qui est commun à toutes les cartes
+  Gunther/        la bibliothèque du mode simplifié
+  SdFat/          la gestion de la carte SD
 
-platforms/                  UNE PLATEFORME PAR FAMILLE DE MICROCONTRÔLEUR
-  samd51/                   cartes SAMD51 : cœur Arduino, brochage, bootloader, Wire, SPI,
-                            Servo, EEPROM, Watchdog, exemples du mode classique
-  stm32/                    cartes STM32 (à venir, cœur STM32duino)
+platforms/        une plateforme par famille de microcontrôleur
+  samd51/         tout ce qui est propre au SAMD51 (cœur Arduino, brochage, bootloader...)
+  stm32/          la future plateforme STM32
 
-docs/
-  samd51/                   manuels d'utilisation (mode simplifié et mode classique)
-
-tools/
-  make_release.py           crée l'archive d'une plateforme (avec les bibliothèques communes)
-                            et met à jour le JSON
-  test_build.py             compile un sketch SAMD51 sans l'IDE
-  build_bootloader.sh       compile le bootloader UF2 de la carte SAMD51
-
-package_gunther_index.json  index lu par l'Arduino IDE (toutes les plateformes)
+docs/             les manuels d'utilisation
+tools/            les scripts pour compiler et publier
+package_gunther_index.json    le fichier que lit l'Arduino IDE
 ```
 
----
-
-## ➕ Ajouter une carte
-
-1. **Même microcontrôleur qu'une plateforme existante** : ajouter la carte dans `platforms/<plateforme>/boards.txt`
-   et son brochage dans `platforms/<plateforme>/variants/<carte>/`.
-2. **Nouveau microcontrôleur** : créer `platforms/<plateforme>/` (voir [platforms/stm32](platforms/stm32/README.md))
-   et, si besoin, un fichier `libraries/Gunther/src/Gunther_Port_<plateforme>.cpp`.
-
-Pour que la bibliothèque `Gunther` marche sur la carte, le brochage (`variant.h`) doit définir :
-
-| Obligatoire | Optionnel |
-|---|---|
-| `LED_1` … `LED_4`, `SWITCH_1` … `SWITCH_4`, `JACK_1`, `SERVO_1` … `SERVO_4`, `BUZZER`, `VBAT_SENSE`, `VBAT_DIVIDER_RATIO`, `SD_CS`, `BMI088_ACCEL_CS`, `BMI088_GYRO_CS` | `LED_RGB` (LED d'état), `SD_DETECT` + `SD_DETECT_WORKS`, `GUNTHER_BARO_WIRE` / `GUNTHER_IMU_SPI` / `GUNTHER_SD_SPI` (bus utilisés, par défaut `Wire` / `SPI1` / `SPI`) |
+La bibliothèque `Gunther` est écrite une seule fois pour toutes les cartes. Ce qui dépend vraiment du
+microcontrôleur (la LED RGB, la mesure de la pile...) est isolé dans de petits fichiers `Gunther_Port_*.cpp`,
+un par plateforme.
 
 ---
 
-## 🚀 Publier une nouvelle version d'une plateforme
+## ➕ Ajouter une nouvelle carte
+
+- **Si elle utilise un microcontrôleur déjà géré**, il suffit de l'ajouter dans le `boards.txt` de sa plateforme
+  et de décrire son brochage dans `variants/`.
+- **Si c'est un nouveau microcontrôleur**, on crée un nouveau dossier dans `platforms/`
+  (le README de [platforms/stm32](platforms/stm32/README.md) explique comment).
+
+Pour que la bibliothèque `Gunther` fonctionne dessus, le brochage de la carte doit définir au minimum :
+`LED_1` à `LED_4`, `SWITCH_1` à `SWITCH_4`, `JACK_1`, `SERVO_1` à `SERVO_4`, `BUZZER`, `VBAT_SENSE`,
+`VBAT_DIVIDER_RATIO`, `SD_CS`, `BMI088_ACCEL_CS` et `BMI088_GYRO_CS`.
+
+Selon la carte, on peut aussi définir `LED_RGB` (LED d'état), `SD_DETECT` avec `SD_DETECT_WORKS`,
+et les bus utilisés : `GUNTHER_BARO_WIRE`, `GUNTHER_IMU_SPI`, `GUNTHER_SD_SPI`
+(par défaut `Wire`, `SPI1` et `SPI`).
+
+---
+
+## 🚀 Publier une nouvelle version
 
 ```
 python3 tools/make_release.py samd51
 ```
 
-1. Créer la release GitHub **`samd51-v<version>`** (ex. `samd51-v0.1.5`) et y déposer `dist/gunther-samd51-<version>.tar.bz2`.
-2. Commit + push de `package_gunther_index.json`.
+Le script prépare l'archive de la plateforme dans `dist/` et met à jour `package_gunther_index.json`. Ensuite :
 
-Chaque plateforme a ses propres versions : publier la carte STM32 ne change rien pour la carte SAMD51.
-Les anciennes versions restent dans le JSON et peuvent toujours être installées.
+1. Sur GitHub, crée une release nommée **`samd51-v<version>`** (par exemple `samd51-v0.1.5`) et ajoute-y l'archive.
+2. Fais un commit et un push de `package_gunther_index.json`.
+
+Chaque plateforme avance à son rythme : sortir une nouvelle version de la carte STM32 ne touche pas à celle
+de la minifusée, et les anciennes versions restent installables.
 
 ---
 
