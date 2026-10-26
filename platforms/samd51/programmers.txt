@@ -1,0 +1,28 @@
+# Gunther.ino - SWD programmers (Tools > Programmer)
+# Used by "Burn Bootloader", "Upload Using Programmer" and the debugger (Debug button).
+# Wiring on the SWD connector: SWCLK, SWDIO, GND, 3V3 (reference), RESET.
+
+# Raspberry Pi Debug Probe, Pico running debugprobe, Atmel-ICE, MCU-Link, DAPLink...
+cmsisdap.name=CMSIS-DAP (Raspberry Pi Debug Probe, Atmel-ICE...)
+cmsisdap.communication=USB
+cmsisdap.protocol=
+cmsisdap.program.protocol=
+cmsisdap.program.tool=openocd
+cmsisdap.program.tool.default=openocd
+cmsisdap.program.extra_params=
+cmsisdap.openocd.interface=interface/cmsis-dap.cfg
+cmsisdap.openocd.transport=swd
+cmsisdap.openocd.debug_config=cmsis-dap
+
+# ST-Link V2 (original or clone). If the connection fails, hold the board RESET
+# button and release it when OpenOCD starts (the RST pin of clones often does not work).
+stlink.name=ST-Link V2
+stlink.communication=USB
+stlink.protocol=
+stlink.program.protocol=
+stlink.program.tool=openocd
+stlink.program.tool.default=openocd
+stlink.program.extra_params=
+stlink.openocd.interface=interface/stlink.cfg
+stlink.openocd.transport=hla_swd
+stlink.openocd.debug_config=stlink

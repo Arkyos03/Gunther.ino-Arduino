@@ -1,112 +1,138 @@
 <div align="center">
 
-# 🚀 OBC-STD Minifs
+# 🚀 Gunther.ino
 
-**Ordinateur de bord standardisé pour minifusées**
+**La bibliothèque Arduino commune à toutes les cartes Gunther.ino des fusées d'AIR ESIEA**
 
 *by Arkyos03 for AIR ESIEA*
 
-![Version](https://img.shields.io/badge/version-0.1.3-blue)
 ![Arduino](https://img.shields.io/badge/Arduino-IDE%202.x-00979D?logo=arduino&logoColor=white)
-![MCU](https://img.shields.io/badge/MCU-ATSAMD51J20A-orange)
 ![Licence](https://img.shields.io/badge/licence-MIT-green)
 
 </div>
 
 ---
 
-## ✨ La carte
+## 💡 Le principe
 
-| | |
-|---|---|
-| 🧠 **Processeur** | ATSAMD51J20A, 120 MHz, 1 Mo de flash |
-| 🌡️ **Baromètre** | BMP390 (I2C) : pression, température, altitude |
-| 🧭 **Centrale inertielle** | BMI088 (SPI) : accéléromètre + gyroscope |
-| 💾 **Stockage** | Carte micro SD |
-| ⚙️ **Sorties** | 4 servos, 4 LED, buzzer |
-| 🔌 **Entrées** | 4 switchs, 1 jack, mesure de la batterie |
-| 🔋 **Alimentation** | Batterie 9 V ou USB-C |
+Toutes les cartes Gunther.ino (minifusée, fusée expérimentale...) se programment **de la même façon** :
+
+- **un seul lien** à coller dans l'Arduino IDE, qui propose toutes les cartes ;
+- **une seule bibliothèque `Gunther`** : le même programme (`Gunther.begin()`, `Gunther.altitude()`,
+  `Gunther.apogee()`, `Gunther.servoOpen(1)`...) fonctionne sur toutes les cartes ;
+- les **mêmes noms de broches** (`LED_1`, `JACK_1`, `SERVO_1`, `BUZZER`...) sur toutes les cartes.
+
+Un programme écrit pour la minifusée se reprend donc tel quel sur une autre carte Gunther.ino :
+seul le choix de la carte change dans **Outils › Type de carte**.
 
 ---
 
-## 📥 Installation
+## 🧩 Les cartes
+
+| Carte | Fusée | Microcontrôleur | Paquet à installer | Version | Détails |
+|---|---|---|---|---|---|
+| **Gunther.ino (Rev A)** | Minifusée | ATSAMD51J20A | Gunther.ino SAMD51 | 0.1.5 | [platforms/samd51](platforms/samd51/README.md) |
+| *Carte fusée expérimentale* | Fusée expérimentale | STM32F4 | Gunther.ino STM32 | à venir | [platforms/stm32](platforms/stm32/README.md) |
+
+---
+
+## 📥 Installation (toutes les cartes)
 
 1. Dans l'Arduino IDE, ouvrir **Fichier › Préférences**.
 2. Dans **URL de gestionnaire de cartes supplémentaires**, coller :
    ```
-   https://raw.githubusercontent.com/Arkyos03/OBC-Arduino/main/package_obc_index.json
+   https://raw.githubusercontent.com/Arkyos03/Gunther.ino-Arduino/main/package_gunther_index.json
    ```
-3. Ouvrir **Outils › Type de carte › Gestionnaire de cartes**, chercher **OBC-STD** et cliquer sur **Installer**.
-4. Choisir **Outils › Type de carte › OBC-STD Minifs**, puis le port USB.
+3. **Outils › Type de carte › Gestionnaire de cartes** : chercher **Gunther.ino** et installer le paquet de sa carte.
+4. Choisir la carte dans **Outils › Type de carte**, puis le port USB.
 
-C'est prêt : on programme la carte comme un Arduino classique.
-
----
-
-## 📌 Brochage
-
-| Nom dans le code | Rôle |
-|---|---|
-| `LED_1` … `LED_4` | LED sur bornier |
-| `SWITCH_1` … `SWITCH_4` | Switchs sur bornier |
-| `JACK_1` | Jack de décollage |
-| `SERVO_1` … `SERVO_4` | Servomoteurs |
-| `BUZZER` | Buzzer de la carte |
-| `Serial` | Moniteur série (USB) |
-| `Serial1` | UART d'extension |
-| `Wire` | Bus I2C (BMP390 + capteurs externes) |
-| `SPI` · `SD_CS` | Carte micro SD |
-| `SPI1` · `BMI088_ACCEL_CS` · `BMI088_GYRO_CS` | Centrale inertielle |
-| `SPI1` · `SPI1_CS_EXT` | Capteur SPI externe |
+La bibliothèque `Gunther` est installée automatiquement avec chaque paquet : rien d'autre à faire.
 
 ---
 
-## ⚡ Exemple
+## ⚡ Deux façons de programmer
+
+| | Mode simplifié | Mode classique |
+|---|---|---|
+| Comment | `#include <Gunther.h>` puis `Gunther.begin()`, `Gunther.apogee()`... | Code Arduino standard (`pinMode`, `digitalWrite`, `Wire`, `SPI`...) avec les noms des broches |
+| Commun à toutes les cartes | Oui : même bibliothèque, même programme | Les noms de broches oui, les détails matériels dépendent de la carte |
+| Exemples | **Fichier › Exemples › Gunther** | **Fichier › Exemples › Gunther Classique** |
 
 ```cpp
-#include <OBC.h>
-#include <Servo.h>
-
-Servo trappe;
+#include <Gunther.h>
 
 void setup() {
-  OBC.begin();
-  trappe.attach(SERVO_1);
-  trappe.write(0);              // trappe fermée
+  Gunther.begin();          // capteurs, altitude du sol
+  Gunther.servoClose(1);    // trappe fermée
+  Gunther.selfTest();       // 3 bips = tout est OK
+  Gunther.logBegin();       // nouveau fichier vol_XXX.csv
 }
 
 void loop() {
-  if (OBC.liftoff()) {          // le jack a été arraché
-    delay(6000);
-    trappe.write(90);           // ouverture du parachute
-    OBC.beep();
-  }
+  Gunther.update();
+  Gunther.logFlight();      // une ligne de données sur la carte SD
+  if (Gunther.apogee()) Gunther.servoOpen(1);
 }
 ```
 
-D'autres exemples sont dans **Fichier › Exemples › OBC**.
-
-### Fonctions de la bibliothèque `OBC`
-
-| Fonction | Effet |
-|---|---|
-| `OBC.begin()` | Prépare la carte |
-| `OBC.led(1, true)` | Allume la LED 1 |
-| `OBC.switchClosed(2)` | `true` si le switch 2 est fermé |
-| `OBC.jackPlugged(1)` | `true` si le jack 1 est branché |
-| `OBC.liftoff()` | `true` quand le jack de décollage est arraché |
-| `OBC.beep()` | Bip du buzzer |
-| `OBC.batteryVoltage()` | Tension de la batterie en volts |
-| `OBC.sdCardPresent()` | `true` si une carte SD est insérée |
-
-Les bibliothèques **SdFat**, **Adafruit BMP3XX** et **Bolder Flight BMI088** du gestionnaire de bibliothèques fonctionnent avec la carte.
+La liste complète des fonctions et des animations de la LED d'état est dans le README de chaque carte
+et dans les manuels (`docs/`).
 
 ---
 
-## 🛠️ En cas de problème
+## 🗂️ Organisation du dépôt
 
-Si le téléversement échoue (programme planté) :
-**appuyer deux fois rapidement sur RESET**. La LED 1 pulse, la carte est prête : relancer le téléversement.
+```
+libraries/                  COMMUN À TOUTES LES CARTES
+  Gunther/                  bibliothèque du mode simplifié (même API partout)
+    src/Gunther_Port.h      ce qui dépend du microcontrôleur (un fichier par plateforme)
+  SdFat/                    carte SD (MIT, Bill Greiman)
+
+platforms/                  UNE PLATEFORME PAR FAMILLE DE MICROCONTRÔLEUR
+  samd51/                   cartes SAMD51 : cœur Arduino, brochage, bootloader, Wire, SPI,
+                            Servo, EEPROM, Watchdog, exemples du mode classique
+  stm32/                    cartes STM32 (à venir, cœur STM32duino)
+
+docs/
+  samd51/                   manuels d'utilisation (mode simplifié et mode classique)
+
+tools/
+  make_release.py           crée l'archive d'une plateforme (avec les bibliothèques communes)
+                            et met à jour le JSON
+  test_build.py             compile un sketch SAMD51 sans l'IDE
+  build_bootloader.sh       compile le bootloader UF2 de la carte SAMD51
+
+package_gunther_index.json  index lu par l'Arduino IDE (toutes les plateformes)
+```
+
+---
+
+## ➕ Ajouter une carte
+
+1. **Même microcontrôleur qu'une plateforme existante** : ajouter la carte dans `platforms/<plateforme>/boards.txt`
+   et son brochage dans `platforms/<plateforme>/variants/<carte>/`.
+2. **Nouveau microcontrôleur** : créer `platforms/<plateforme>/` (voir [platforms/stm32](platforms/stm32/README.md))
+   et, si besoin, un fichier `libraries/Gunther/src/Gunther_Port_<plateforme>.cpp`.
+
+Pour que la bibliothèque `Gunther` marche sur la carte, le brochage (`variant.h`) doit définir :
+
+| Obligatoire | Optionnel |
+|---|---|
+| `LED_1` … `LED_4`, `SWITCH_1` … `SWITCH_4`, `JACK_1`, `SERVO_1` … `SERVO_4`, `BUZZER`, `VBAT_SENSE`, `VBAT_DIVIDER_RATIO`, `SD_CS`, `BMI088_ACCEL_CS`, `BMI088_GYRO_CS` | `LED_RGB` (LED d'état), `SD_DETECT` + `SD_DETECT_WORKS`, `GUNTHER_BARO_WIRE` / `GUNTHER_IMU_SPI` / `GUNTHER_SD_SPI` (bus utilisés, par défaut `Wire` / `SPI1` / `SPI`) |
+
+---
+
+## 🚀 Publier une nouvelle version d'une plateforme
+
+```
+python3 tools/make_release.py samd51
+```
+
+1. Créer la release GitHub **`samd51-v<version>`** (ex. `samd51-v0.1.5`) et y déposer `dist/gunther-samd51-<version>.tar.bz2`.
+2. Commit + push de `package_gunther_index.json`.
+
+Chaque plateforme a ses propres versions : publier la carte STM32 ne change rien pour la carte SAMD51.
+Les anciennes versions restent dans le JSON et peuvent toujours être installées.
 
 ---
 

@@ -1,0 +1,51 @@
+{
+  "packages": [
+    {
+      "name": "gunther",
+      "maintainer": "Arkyos03 for AIR ESIEA",
+      "websiteURL": "https://github.com/Arkyos03/Gunther.ino-Arduino",
+      "email": "",
+      "help": {
+        "online": "https://github.com/Arkyos03/Gunther.ino-Arduino"
+      },
+      "platforms": [
+        {
+          "name": "Gunther.ino (AIR ESIEA)",
+          "architecture": "samd51gunther",
+          "version": "0.1.4",
+          "category": "Contributed",
+          "url": "https://github.com/Arkyos03/Gunther.ino-Arduino/releases/download/v0.1.4/gunther-samd51-0.1.4.tar.bz2",
+          "archiveFileName": "gunther-samd51-0.1.4.tar.bz2",
+          "checksum": "SHA-256:99ac255d08cf1cfbc0d70f860ebfbb43fe5ef60f4f19609fbac0c5be6069f002",
+          "size": "642041",
+          "help": {
+            "online": "https://github.com/Arkyos03/Gunther.ino-Arduino"
+          },
+          "boards": [
+            {
+              "name": "Gunther.ino (Rev A)"
+            }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "arduino",
+              "name": "arm-none-eabi-gcc",
+              "version": "7-2017q4"
+            },
+            {
+              "packager": "arduino",
+              "name": "bossac",
+              "version": "1.8.0-48-gb176eee"
+            },
+            {
+              "packager": "arduino",
+              "name": "openocd",
+              "version": "0.11.0-arduino2"
+            }
+          ]
+        }
+      ],
+      "tools": []
+    }
+  ]
+}

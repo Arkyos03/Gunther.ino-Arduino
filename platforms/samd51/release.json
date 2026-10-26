@@ -1,0 +1,24 @@
+{
+  "architecture": "samd51gunther",
+  "commonLibraries": [
+    "Gunther",
+    "SdFat"
+  ],
+  "toolsDependencies": [
+    {
+      "packager": "arduino",
+      "name": "arm-none-eabi-gcc",
+      "version": "7-2017q4"
+    },
+    {
+      "packager": "arduino",
+      "name": "bossac",
+      "version": "1.8.0-48-gb176eee"
+    },
+    {
+      "packager": "arduino",
+      "name": "openocd",
+      "version": "0.11.0-arduino2"
+    }
+  ]
+}

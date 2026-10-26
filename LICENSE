@@ -21,6 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 -------------------------------------------------------------------------------
-This license covers the files written for the OBC-STD project (core, variant,
+This license covers the files written for the Gunther.ino project (core, variant,
 libraries, scripts). The folders listed in THIRD_PARTY_NOTICES.md keep their
 own permissive licenses (Apache-2.0 / MIT).
